@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
  @AllArgsConstructor
 public class VegetableDTO {
 
-	private long vegId;
+	private int vegId;
 	private String vegName;
-	private double price;
+	private double vegPrice;
 
 }

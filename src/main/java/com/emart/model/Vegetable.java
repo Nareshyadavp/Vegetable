@@ -19,9 +19,9 @@ public class Vegetable {
 	
 	 @Id
 	 @GeneratedValue(strategy = GenerationType.AUTO)
-	private long vegId;
+	private int vegId;
 	private String vegName;
-	private double price;
+	private double vegPrice;
 	 
 	
 }

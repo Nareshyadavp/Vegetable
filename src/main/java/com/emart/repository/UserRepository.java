@@ -1,19 +1,17 @@
 package com.emart.repository;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import org.springframework.stereotype.Repository;
+ 
+import org.springframework.data.repository.CrudRepository;
 
 import com.emart.dto.UserDTO;
 import com.emart.model.User;
  
-@Repository
-public interface UserRepository extends JpaRepository<User, Long> {
+ 
+public interface UserRepository extends CrudRepository<User, Integer> {
 
-	//User save(UserDTO userDTO);
+	  User save(UserDTO userDTO);
 	
 	//public User save(User user);
 
 
-	public User findById(long userId);
+	  User findByUserId(int userId);
 }

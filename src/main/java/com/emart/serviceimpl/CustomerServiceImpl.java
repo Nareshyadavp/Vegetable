@@ -1,13 +1,16 @@
 package com.emart.serviceimpl;
 
+import org.springframework.data.domain.Pageable;
+import java.util.ArrayList;
 import java.util.List;
-
 
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.emart.dto.CustomerDTO;
@@ -24,7 +27,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Autowired
 	private ModelMapper modelMapper;
-	
+
 	@Override
 	@Transactional
 	public CustomerDTO saveCustomerDetails(CustomerDTO customerDTO) throws BadRequestException {
@@ -60,6 +63,50 @@ public class CustomerServiceImpl implements CustomerService {
 		return dtos;
 	}
 
-	
+	@Override
+	public List<CustomerDTO> getAll() {
+		List<CustomerDTO> customerDTOs = new ArrayList<>();
+		List<Customer> customers = (List<Customer>) customerRepository.findAll();
+		for (Customer customer : customers) {
+			CustomerDTO customerDTO = modelMapper.map(customer, CustomerDTO.class);
+			customerDTOs.add(customerDTO);
+		}
+		return customerDTOs;
+	}
+
+	@Override
+	public CustomerDTO updateUser(CustomerDTO customerDTO) {
+
+		Customer customer = modelMapper.map(customerDTO, Customer.class);
+		customer = customerRepository.save(customer);
+		return modelMapper.map(customer, CustomerDTO.class);
+	}
+
+//	@Override
+//	public List<CustomerDTO> getAllPagination(int pageNo, int pageSize) {
+//		Pageable pageable =  PageRequest.of(pageNo, pageSize);
+//		Page<CustomerDTO> pageResult = customerRepository.findAll(pageable);
+//		if (pageResult.hasContent()) {
+//			return pageResult.getContent();
+//
+//		} else {
+//			return new ArrayList<>();
+//		}
+//	}
+
+	@Override
+	public List<Customer> getAllPaginationCustomer(int pageNo, int pageSize) {
+		Pageable paging= PageRequest.of(pageNo, pageSize);
+		
+		Page<Customer> pageResult = customerRepository.findAll(paging);
+		if(pageResult.hasContent()) {
+			return pageResult.getContent();
+		}else {
+			return new ArrayList<Customer>();
+		}
+		
+		
+	}
+
 
 }

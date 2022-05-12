@@ -1,29 +1,55 @@
 package com.emart.dto;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
- 
- import lombok.Data;
- 
- 
- public class UserDTO {
+public class UserDTO {
 
-	private Long userId;
-	@NotEmpty
+	private int userId;
 	private String userName;
-	 
+	private String userPasswpord;
+	private String userEmail;
+	private String userRole;
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+	public String getUserName() {
+		return userName;
+	}
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
-	@NotEmpty
-	private String userMobile;
-	@Email
-	@NotEmpty
-	private String userEmail;
 
-	
-	//private String userAddress;
+	public String getUserPasswpord() {
+		return userPasswpord;
+	}
+
+	public void setUserPasswpord(String userPasswpord) {
+		this.userPasswpord = userPasswpord;
+	}
+
+	public String getUserEmail() {
+		return userEmail;
+	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+
+	public String getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
+	}
 
 }

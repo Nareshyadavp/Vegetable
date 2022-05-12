@@ -7,8 +7,6 @@ import org.springframework.stereotype.Service;
 import com.emart.dto.CustomerDTO;
 import com.emart.exception.BadRequestException;
 import com.emart.model.Customer;
- 
-@Service
 public interface CustomerService {
 
 	CustomerDTO saveCustomerDetails(CustomerDTO customerDTO) throws BadRequestException;
@@ -19,11 +17,16 @@ public interface CustomerService {
 
 	List<Customer> searchCustomer(String query)throws BadRequestException;
 
+	List<CustomerDTO> getAll();
 	
-	
-	
+	CustomerDTO updateUser(CustomerDTO customerDTO);
 	
 	//CustomerDTO postCustomerData( CustomerDTO customerDTO);
+	
+	
+	//List<CustomerDTO> getAllPagination(int pageNo, int pageSize );
+	
+	List<Customer> getAllPaginationCustomer(int pageNo, int pageSize );
 	
 }
 

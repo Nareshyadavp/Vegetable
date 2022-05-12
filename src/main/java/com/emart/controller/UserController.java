@@ -11,35 +11,52 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.emart.dto.CustomerDTO;
 import com.emart.dto.UserDTO;
+import com.emart.exception.BadRequestException;
 import com.emart.model.User;
 import com.emart.service.UserService;
 
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
-@RequestMapping("user/api/v1")
+
 public class UserController {
 
 	@Autowired
 	private UserService userService;
 
-	@PostMapping("/usercreate")
-	public ResponseEntity<UserDTO> saveUser(@RequestBody UserDTO userDTO) {
-		return new ResponseEntity<>(userService.saveUser(userDTO), HttpStatus.OK);
-
-	}
+	//@PostMapping("/usercreate")
+	
+//	public ResponseEntity<UserDTO> saveUserDetails(
+//
+//			@RequestBody UserDTO userDTO) throws BadRequestException {
+//		try {
+//			userDTO = userService.saveUserDetails(userDTO);
+//		} catch (BadRequestException e) {
+//			throw new BadRequestException("Failed to save user details");
+//		}
+//		return new ResponseEntity<>(userDTO, HttpStatus.CREATED);
+//
+//	}
 
 	@GetMapping("/getall")
 	public ResponseEntity<List<UserDTO>> getAll(){
 		return new ResponseEntity<List<UserDTO>>(userService.findByAllUser(),HttpStatus.OK);
 		
 	}
-	@PostMapping("/userentity")
-	public User saveUser(@RequestBody User user) {
-		return userService.saveUser(user);
-		//return new ResponseEntity<>(userService.saveUser(user), HttpStatus.OK);
-
+//	@PostMapping("/userentity")
+//	public User saveUser(@RequestBody User user) {
+//		return userService.saveUser(user);
+//		//return new ResponseEntity<>(userService.saveUser(user), HttpStatus.OK);
+//
+//	}
+	
+	@PostMapping("/saveuser")
+	public ResponseEntity<UserDTO> saveUserDetails(
+			@RequestBody UserDTO userDTO) throws BadRequestException {
+ 				return new ResponseEntity<>( userService.saveUserDetails(userDTO),HttpStatus.CREATED);
+		
 	}
 	
 }

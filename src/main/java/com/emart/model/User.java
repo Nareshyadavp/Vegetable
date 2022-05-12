@@ -1,74 +1,70 @@
 package com.emart.model;
 
-import javax.persistence.Column;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.sun.istack.NotNull;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "User_detail")
- 
+@Table(name = "nareshuser")
 public class User {
-	
-	
 
-	 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long userId;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private int userId;
 
-	@Column(name = "User_Name")
-	@NotNull
 	private String userName;
-
-	@Column(name = "User_Mobile")
-	@NotNull
-	private String userMobile;
-	
- 	@Column(name = "User_Email")
- 	@NotNull
+	private String userPasswpord;
 	private String userEmail;
-	public User() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public long getUserId() {
+	private String userRole;
+
+	public int getUserId() {
 		return userId;
 	}
-	public void setUserId(long userId) {
+
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
+
 	public String getUserName() {
 		return userName;
 	}
+
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getUserMobile() {
-		return userMobile;
+
+	public String getUserPasswpord() {
+		return userPasswpord;
 	}
-	public void setUserMobile(String userMobile) {
-		this.userMobile = userMobile;
+
+	public void setUserPasswpord(String userPasswpord) {
+		this.userPasswpord = userPasswpord;
 	}
+
 	public String getUserEmail() {
 		return userEmail;
 	}
+
 	public void setUserEmail(String userEmail) {
 		this.userEmail = userEmail;
 	}
- 	
- 	
 
-	//@Column(name = "User_Address", nullable = false)
-	//private String userAddress;
+	public String getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
+	}
+
+	public User() {
+		super();
+	}
 
 }
