@@ -62,4 +62,11 @@ public class VegetableServiceImpl implements VegetableService {
 		return vegetableDTOs;
 	}
 
+	@Override
+	public VegetableDTO updateVegetable(VegetableDTO vegetableDTO) {
+		Vegetable vegetable=modelMapper.map(vegetableDTO, Vegetable.class);
+		vegetable=vegetableRepository.save(vegetable);
+ 		return modelMapper.map(vegetable, VegetableDTO.class);
+	}
+
 }

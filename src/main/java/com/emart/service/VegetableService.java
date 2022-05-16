@@ -17,7 +17,7 @@ public interface VegetableService {
 
 	  VegetableDTO getVegId(int vegId) throws BadRequestException ;
 	  
-	  
+	  VegetableDTO updateVegetable(VegetableDTO vegetableDTO);
  
 
 	List<VegetableDTO> getAll();

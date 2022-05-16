@@ -7,11 +7,14 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +25,8 @@ import com.emart.repository.CustomerRepository;
 import com.emart.service.CustomerService;
 
 @RestController
-
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/api/customer")
 public class CustomerController {
 
 	@Autowired
@@ -31,11 +35,12 @@ public class CustomerController {
 	@Autowired
 	private CustomerRepository customerRepository;
 
+ //	@PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/create")
 
-	public ResponseEntity<CustomerDTO> saveCustomerDetails(
+	public ResponseEntity<CustomerDTO> saveCustomerDetails(@Valid
 
-			@RequestBody CustomerDTO customerDTO) throws BadRequestException {
+	@RequestBody CustomerDTO customerDTO) throws BadRequestException {
 		try {
 			customerDTO = customerService.saveCustomerDetails(customerDTO);
 		} catch (BadRequestException e) {
@@ -46,6 +51,8 @@ public class CustomerController {
 	}
 
 	@GetMapping("/{customerId}")
+ 	@PreAuthorize("hasRole('ADMIN')")
+
 	public ResponseEntity<CustomerDTO> getCustomerId(@PathVariable long customerId) throws BadRequestException {
 		CustomerDTO customerDTO = null;
 		try {
@@ -62,6 +69,8 @@ public class CustomerController {
 	}
 
 	@GetMapping("get/{customerName}")
+ 	@PreAuthorize("hasRole('USER')")
+
 	public ResponseEntity<CustomerDTO> getCustomerName(@PathVariable String customerName) throws BadRequestException {
 		CustomerDTO customerDTO = null;
 		try {
@@ -80,6 +89,8 @@ public class CustomerController {
 	}
 
 	@GetMapping("/search")
+ 	@PreAuthorize("hasRole('ADMIN')")
+
 	public ResponseEntity<List<Customer>> searchCustomer(@RequestParam(value = "query") String query)
 			throws BadRequestException {
 
@@ -89,6 +100,8 @@ public class CustomerController {
 	}
 
 	@GetMapping("/list")
+ 	//@PreAuthorize("hasRole('USER')")
+
 	public ResponseEntity<List<CustomerDTO>> getAll() {
 		List<CustomerDTO> list = customerService.getAll();
 		return new ResponseEntity<List<CustomerDTO>>(list, HttpStatus.OK);
@@ -117,4 +130,5 @@ public class CustomerController {
 		return new ResponseEntity<List<Customer>>(customer, HttpStatus.OK);
 		
 	}
+	
 }

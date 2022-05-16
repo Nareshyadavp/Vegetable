@@ -27,6 +27,8 @@ public interface CustomerService {
 	//List<CustomerDTO> getAllPagination(int pageNo, int pageSize );
 	
 	List<Customer> getAllPaginationCustomer(int pageNo, int pageSize );
+ 
+	
 	
 }
 

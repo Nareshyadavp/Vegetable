@@ -1,12 +1,22 @@
 package com.emart.model;
 
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,6 +47,12 @@ public class Customer {
 
 	@Column(name = "cus_email", nullable = false)
 	@Email
-	private String customerEmail;
+	@NotEmpty
+ 	private String customerEmail;
+	
+	@ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@JoinTable(name="customer_vegetable",joinColumns = @JoinColumn(name="customerVegId",referencedColumnName = "customerId"),
+	inverseJoinColumns=@JoinColumn(name="vegcId",referencedColumnName = "vegId") 	)
+	private Set<Vegetable> vegetables;
 
 }

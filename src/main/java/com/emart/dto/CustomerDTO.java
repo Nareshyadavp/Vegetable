@@ -1,9 +1,9 @@
 package com.emart.dto;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 
-import com.sun.istack.NotNull;
-
+ 
 import lombok.Data;
 
 @Data
@@ -18,7 +18,7 @@ public class CustomerDTO {
 	private String customerAddress;
 
 	@Email
-	@NotNull
+	@NotEmpty
 	private String customerEmail;
 
 }
