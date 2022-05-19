@@ -29,20 +29,22 @@ public class VegetableController {
 
 	@Autowired
 	private VegetableService vegetableService;
-	
+
 	@Autowired
 	private VegetableRepository vegetableRepository;
 
- //	@PreAuthorize("hasRole('ADMIN')")
+	// @PreAuthorize("hasRole('ADMIN')")
 	@PostMapping("/vegcreate")
-	public ResponseEntity<VegetableDTO> saveVegaetble(@RequestBody VegetableDTO vegetableDTO) throws BadRequestException {
+	public ResponseEntity<VegetableDTO> saveVegaetble(@RequestBody VegetableDTO vegetableDTO)
+			throws BadRequestException {
 		return new ResponseEntity<>(vegetableService.saveVegetable(vegetableDTO), HttpStatus.CREATED);
 
 	}
- 	@PreAuthorize("hasRole('USER')")
+
+	@PreAuthorize("hasRole('USER')")
 	@GetMapping("/getvegetableid/{vegId}")
 	public ResponseEntity<VegetableDTO> getVegId(@PathVariable int vegId) throws BadRequestException {
-		
+
 //		VegetableDTO vegetableDTO = vegetableService.getVegId(vegId);
 //		return new ResponseEntity<VegetableDTO>(vegetableDTO,HttpStatus.OK);
 // 
@@ -61,34 +63,28 @@ public class VegetableController {
 			}
 
 		} catch (BadRequestException e) {
-			throw new BadRequestException("vegetable id is not matched please enter correct Id" +vegId);
+			throw new BadRequestException("vegetable id is not matched please enter correct Id" + vegId);
 		}
 
 	}
-	
 
-	
- 	//@PreAuthorize("hasRole('ADMIN')")
+	// @PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/getvegall")
-	public List<VegetableDTO> getVegetables(){
+	public List<VegetableDTO> getVegetables() {
 		return vegetableService.getAll();
-		
+
 	}
-	
-	
-	
 
 	@PutMapping("/veg/{vegId}")
-  public ResponseEntity<VegetableDTO> updateVegetable(@PathVariable int vegId,@RequestBody @Valid VegetableDTO vegetableDTO) throws BadRequestException{
-		if(! vegetableRepository.existsById(vegId)) {
-	throw new BadRequestException("Failed to update Vegetableid ");
+	public ResponseEntity<VegetableDTO> updateVegetable(@PathVariable int vegId,
+			@RequestBody @Valid VegetableDTO vegetableDTO) throws BadRequestException {
+		if (!vegetableRepository.existsById(vegId)) {
+			throw new BadRequestException("Failed to update Vegetableid ");
 
 		}
-		vegetableDTO=vegetableService.updateVegetable(vegetableDTO);
-		return new ResponseEntity<>(vegetableDTO,HttpStatus.CREATED);
-		
+		vegetableDTO = vegetableService.updateVegetable(vegetableDTO);
+		return new ResponseEntity<>(vegetableDTO, HttpStatus.CREATED);
+
 	}
-	
- 
 
 }

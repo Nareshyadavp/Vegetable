@@ -2,22 +2,17 @@ package com.emart.controller;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.emart.dto.CustomerDTO;
 import com.emart.dto.UserDTO;
 import com.emart.exception.BadRequestException;
-import com.emart.model.User;
 import com.emart.service.UserService;
-
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 
@@ -26,8 +21,8 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
-	//@PostMapping("/usercreate")
-	
+	// @PostMapping("/usercreate")
+
 //	public ResponseEntity<UserDTO> saveUserDetails(
 //
 //			@RequestBody UserDTO userDTO) throws BadRequestException {
@@ -41,9 +36,9 @@ public class UserController {
 //	}
 
 	@GetMapping("/getall")
-	public ResponseEntity<List<UserDTO>> getAll(){
-		return new ResponseEntity<List<UserDTO>>(userService.findByAllUser(),HttpStatus.OK);
-		
+	public ResponseEntity<List<UserDTO>> getAll() {
+		return new ResponseEntity<List<UserDTO>>(userService.findByAllUser(), HttpStatus.OK);
+
 	}
 //	@PostMapping("/userentity")
 //	public User saveUser(@RequestBody User user) {
@@ -51,12 +46,12 @@ public class UserController {
 //		//return new ResponseEntity<>(userService.saveUser(user), HttpStatus.OK);
 //
 //	}
-	
+
 	@PostMapping("/saveuser")
-	public ResponseEntity<UserDTO> saveUserDetails(
-			@RequestBody UserDTO userDTO) throws BadRequestException {
- 				return new ResponseEntity<>( userService.saveUserDetails(userDTO),HttpStatus.CREATED);
-		
+	public ResponseEntity<UserDTO> saveUserDetails(@RequestBody UserDTO userDTO)
+			throws BadRequestException {
+		return new ResponseEntity<>(userService.saveUserDetails(userDTO), HttpStatus.CREATED);
+
 	}
-	
+
 }

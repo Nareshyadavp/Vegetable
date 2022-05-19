@@ -11,17 +11,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="veg")
+@Table(name = "vegetable_details")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Vegetable {
-	
-	 @Id
-	 @GeneratedValue(strategy = GenerationType.AUTO)
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int vegId;
 	private String vegName;
 	private double vegPrice;
-	 
-	
+	// private int availableQuantity;
+
 }
